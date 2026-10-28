@@ -1,0 +1,30 @@
+# Map grammar node types to universal kinds. Add a language = add one .toml file.
+name = "python"
+grammar = "python"
+extensions = [".py", ".pyi"]
+module_from_path = true
+
+[kinds]
+class_definition = "class"
+function_definition = "function"
+
+[calls]
+call = "function"
+
+[imports]
+nodes = ["import_statement", "import_from_statement"]
+
+[decorators]
+nodes = ["decorator"]
+wrappers = ["decorated_definition"]
+
+[docs]
+style = "python"
+
+[strings]
+nodes = ["string"]
+
+# Annotated or constructed variable, so `repo.save()` links to the Repo class. Groups: var, type.
+[types]
+patterns = ['\b(?P<var>[a-z_]\w*)\s*:\s*(?P<type>[A-Z]\w*)',
+            '\b(?P<var>[a-z_]\w*)\s*=\s*(?P<type>[A-Z]\w*)\(']

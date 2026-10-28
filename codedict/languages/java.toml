@@ -1,0 +1,36 @@
+name = "java"
+grammar = "java"
+extensions = [".java"]
+module_from_path = false
+
+[kinds]
+package_declaration = "namespace"
+class_declaration = "class"
+interface_declaration = "interface"
+enum_declaration = "enum"
+record_declaration = "record"
+annotation_type_declaration = "type"
+method_declaration = "method"
+constructor_declaration = "constructor"
+
+[calls]
+method_invocation = "name"
+object_creation_expression = "type"
+
+[imports]
+nodes = ["import_declaration"]
+
+[decorators]
+nodes = ["annotation", "marker_annotation"]
+containers = ["modifiers"]
+
+[docs]
+style = "comments"
+
+[strings]
+nodes = ["string_literal", "text_block"]
+
+# Declared type of a variable/field, so `repo.save()` links to the Repo class. Groups: var, type.
+[types]
+patterns = ['\b(?P<type>[A-Z]\w*)(?:<[^;=(){}]*>)?\s+(?P<var>[a-z_]\w*)\s*[;=,)]',
+            '\bvar\s+(?P<var>[a-z_]\w*)\s*=\s*new\s+(?P<type>[A-Z]\w*)']

@@ -1,0 +1,31 @@
+[[search]]
+query = "imposto"
+expect = "TaxCalculator.calcular_imposto"
+
+[[search]]
+query = "salvar pedido"
+expect = "usp_SaveOrder"
+
+[[search]]
+query = "buscar pedido por id"
+expect = "OrdersController.Get"
+
+[[calls]]
+src = "get_tax"
+dst = "TaxCalculator.calcular_imposto"
+
+[[calls]]
+src = "OrderService.Save"
+dst = "usp_SaveOrder"
+
+[[calls]]
+src = "usp_SaveOrder"
+dst = "usp_RecalcTotal"
+
+[[routes]]
+method = "GET"
+path = "/api/Orders/{id}"
+
+[[symbols]]
+name = "OrderRepo.get"
+file = "repo.py"

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="250" viewBox="0 0 960 250" role="img" aria-labelledby="t">
+  <title id="t">codedict: a code dictionary for AI. Your AI stops re-reading the whole project on every question.</title>
+  <style>
+    .bg { fill: #fcfcfb; stroke: #e4e3df; }
+    .name { fill: #0b0b0b; font: 700 52px ui-monospace, "SFMono-Regular", Consolas, Menlo, monospace; }
+    .acc { fill: #2a78d6; }
+    .tag { fill: #52514e; font: 20px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .pill { fill: #eef4fc; stroke: #b7d3f6; }
+    .pt { fill: #1c5cab; font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .card { fill: #f4f3ef; stroke: #e4e3df; }
+    .code { white-space: pre; fill: #8a8984; font: 13px ui-monospace, "SFMono-Regular", Consolas, Menlo, monospace; }
+    .hit { fill: #0b0b0b; font: 600 13px ui-monospace, "SFMono-Regular", Consolas, Menlo, monospace; }
+    .mark { fill: #2a78d6; opacity: 0.14; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1a1a19; stroke: #383835; }
+      .name, .hit { fill: #f0efec; }
+      .acc { fill: #3987e5; }
+      .tag { fill: #c3c2b7; }
+      .pill { fill: #16263a; stroke: #1c5cab; }
+      .pt { fill: #9ec5f4; }
+      .card { fill: #232322; stroke: #383835; }
+      .code { fill: #8a8984; }
+      .mark { fill: #3987e5; opacity: 0.22; }
+    }
+  </style>
+  <rect class="bg" x="0.5" y="0.5" width="959" height="249" rx="16"/>
+
+  <text class="name" x="44" y="98">code<tspan class="acc">dict</tspan></text>
+  <text class="tag" x="46" y="136">Sua IA para de reler o projeto inteiro</text>
+  <text class="tag" x="46" y="162">a cada pergunta sobre o código.</text>
+
+  <rect class="pill" x="46" y="186" width="118" height="30" rx="15"/><text class="pt" x="105" y="206" text-anchor="middle">−63% tokens</text>
+  <rect class="pill" x="174" y="186" width="164" height="30" rx="15"/><text class="pt" x="256" y="206" text-anchor="middle">índice sem IA, grátis</text>
+  <rect class="pill" x="348" y="186" width="178" height="30" rx="15"/><text class="pt" x="437" y="206" text-anchor="middle">qualquer IA · linguagem</text>
+
+  <!-- an index card: the question finds the exact symbol and its callers -->
+  <rect class="card" x="580" y="34" width="340" height="182" rx="12"/>
+  <text class="code" x="600" y="64">$ codedict search "onde o desconto</text>
+  <text class="code" x="600" y="82">    é calculado?"</text>
+  <rect class="mark" x="594" y="98" width="312" height="24" rx="5"/>
+  <text class="hit" x="600" y="115">fn Pricing.applyDiscount  price.ts:42</text>
+  <text class="code" x="600" y="142">   called at  checkout.ts:88</text>
+  <text class="code" x="600" y="160">              cart.ts:131</text>
+  <text class="code" x="600" y="178">   caller chain  POST /checkout</text>
+  <text class="code" x="600" y="196">   calls  roundMoney, taxFor</text>
+</svg>

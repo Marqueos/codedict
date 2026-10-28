@@ -1,0 +1,34 @@
+name = "javascript"
+grammar = "javascript"
+extensions = [".js", ".jsx", ".mjs", ".cjs"]
+module_from_path = true
+
+[kinds]
+function_declaration = "function"
+generator_function_declaration = "function"
+class_declaration = "class"
+method_definition = "method"
+
+[var_functions]
+node = "variable_declarator"
+values = ["arrow_function", "function_expression", "function"]
+
+[calls]
+call_expression = "function"
+new_expression = "constructor"
+
+[imports]
+nodes = ["import_statement"]
+
+[decorators]
+nodes = ["decorator"]
+
+[docs]
+style = "comments"
+
+[strings]
+nodes = ["string", "template_string"]
+
+# Variable created with `new`, so `repo.save()` links to the Repo class. Groups: var, type.
+[types]
+patterns = ['\b(?P<var>[a-z_$][\w$]*)\s*=\s*new\s+(?P<type>[A-Z]\w*)']

@@ -1,0 +1,34 @@
+name = "go"
+grammar = "go"
+extensions = [".go"]
+module_from_path = true
+
+[kinds]
+function_declaration = "function"
+method_declaration = "method"
+type_spec = "type"
+
+[calls]
+call_expression = "function"
+
+[imports]
+nodes = ["import_declaration"]
+
+[decorators]
+nodes = []
+
+[docs]
+style = "comments"
+
+[strings]
+nodes = ["interpreted_string_literal", "raw_string_literal"]
+
+# Typed variable, parameter or method receiver, so `c.Run()` links to the Command type. Groups: var, type.
+[types]
+patterns = ['\b(?P<var>[a-z_]\w*)\s*:?=\s*&?(?P<type>[A-Z]\w*)\{',
+            '\bvar\s+(?P<var>[a-z_]\w*)\s+\*?(?P<type>[A-Z]\w*)',
+            '\(\s*(?P<var>[a-z_]\w*)\s+\*?(?P<type>[A-Z]\w*)\s*[,)]']
+
+# Methods live outside their type: `func (c *Command) Run()` is named Command.Run.
+[methods]
+receiver_field = "receiver"

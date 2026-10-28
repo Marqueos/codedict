@@ -1,0 +1,4 @@
+# T-SQL / ANSI SQL files: regex extractor (grammars handle T-SQL poorly).
+name = "sql"
+extractor = "sql_regex"
+extensions = [".sql"]

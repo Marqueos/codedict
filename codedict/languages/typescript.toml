@@ -1,0 +1,40 @@
+name = "typescript"
+grammar = "typescript"
+extensions = [".ts", ".mts", ".cts"]
+module_from_path = true
+
+[kinds]
+function_declaration = "function"
+generator_function_declaration = "function"
+class_declaration = "class"
+method_definition = "method"
+abstract_class_declaration = "class"
+interface_declaration = "interface"
+type_alias_declaration = "type"
+enum_declaration = "enum"
+method_signature = "method"
+
+[var_functions]
+node = "variable_declarator"
+values = ["arrow_function", "function_expression", "function"]
+
+[calls]
+call_expression = "function"
+new_expression = "constructor"
+
+[imports]
+nodes = ["import_statement"]
+
+[decorators]
+nodes = ["decorator"]
+
+[docs]
+style = "comments"
+
+[strings]
+nodes = ["string", "template_string"]
+
+# Declared type of a variable/field, so `repo.save()` links to the Repo class. Groups: var, type.
+[types]
+patterns = ['\b(?P<var>[a-z_$][\w$]*)\??\s*:\s*(?P<type>[A-Z]\w*)',
+            '\b(?P<var>[a-z_$][\w$]*)\s*=\s*new\s+(?P<type>[A-Z]\w*)']

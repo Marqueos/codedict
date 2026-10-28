@@ -1,0 +1,12 @@
+[
+  {
+    "id": "tax-flow",
+    "prompt": "Where is tax calculated, and which HTTP endpoint ends up calling it? List the call chain with file:line. Do not change any file.",
+    "expect": ["calcular_imposto", "get_tax"]
+  },
+  {
+    "id": "save-order-flow",
+    "prompt": "Trace saving an order from the C# service down to the SQL procedures it runs, with file:line for each step. Do not change any file.",
+    "expect": ["OrderService", "usp_SaveOrder", "usp_RecalcTotal"]
+  }
+]

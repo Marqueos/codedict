@@ -1,0 +1,9 @@
+[
+  {"name": "find-subcommand", "expect": "Command.Find",
+   "queries": ["How does a command find which subcommand to run from the args?"]},
+  {"name": "parse-flags", "expect": "Command.ParseFlags",
+   "queries": ["Where are flags parsed before running a command?"]},
+  {"name": "flow-execute", "expect": "Command.Execute|Command.ExecuteC|Command.execute",
+   "mentions": ["Command.ExecuteC", "Command.execute"],
+   "queries": ["What is the flow from Execute until the RunE function of the command runs?"]}
+]

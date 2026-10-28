@@ -1,0 +1,4 @@
+# Razor / Blazor views: file-level facts (route, model, injections).
+name = "razor"
+extractor = "razor_regex"
+extensions = [".cshtml", ".razor"]

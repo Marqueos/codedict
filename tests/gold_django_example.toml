@@ -1,0 +1,30 @@
+[[search]]
+query = "rotate csrf token"
+expect = "django.middleware.csrf.rotate_token"
+[[search]]
+query = "reverse url by name"
+expect = "django.urls.base.reverse"
+[[search]]
+query = "mark string safe html"
+expect = "django.utils.safestring.mark_safe"
+[[search]]
+query = "render template to string"
+expect = "Engine.render_to_string"
+[[search]]
+query = "call management command"
+expect = "django.core.management.call_command"
+[[search]]
+query = "conditional escape"
+expect = "django.utils.html.conditional_escape"
+[[search]]
+query = "foreign key many to one"
+expect = "django.db.models.fields.related.ForeignKey"
+[[search]]
+query = "http response redirect"
+expect = "django.http.response.HttpResponseRedirect"
+[[calls]]
+src = "django.utils.html.conditional_escape"
+dst = "django.utils.html.escape"
+[[calls]]
+src = "django.utils.safestring.mark_safe"
+dst = "django.utils.safestring.SafeString"

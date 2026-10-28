@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]  # 77+: license as an SPDX string
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codedict"
+version = "0.1.0"
+description = "Deterministic code dictionary for LLMs and developers (tree-sitter + SQLite, no AI)"
+requires-python = ">=3.11"
+license = "MIT"
+readme = "README.md"
+dependencies = ["tree-sitter>=0.23", "tree-sitter-language-pack>=0.7"]
+
+[project.urls]
+Homepage = "https://github.com/Marqueos/codedict"
+
+[project.optional-dependencies]
+mcp = ["mcp"]
+dev = ["pytest"]
+
+[project.scripts]
+codedict = "codedict.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["codedict*"]
+
+[tool.setuptools.package-data]
+codedict = ["languages/*.toml"]

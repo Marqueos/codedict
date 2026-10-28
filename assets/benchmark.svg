@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350" role="img" aria-labelledby="t d">
+  <title id="t">Tokens per question in Claude Code, with and without codedict</title>
+  <desc id="d">Median of 3 sessions per task. Short search 1: 129K to 41K (-68%). Short search 2: 224K to 94K (-58%). Flow 1: 500K to 214K (-57%). Flow 2: 641K to 162K (-75%). Total 4.54M to 1.67M tokens (-63%), 12 of 12 answers correct.</desc>
+  <style>
+    .bg { fill: #fcfcfb; stroke: #e4e3df; }
+    .t1 { fill: #0b0b0b; font: 600 18px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .t2 { fill: #52514e; font: 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lb { fill: #0b0b0b; font: 600 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sm { fill: #52514e; font: 12px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .v  { fill: #52514e; font: 12px ui-monospace, "SFMono-Regular", Consolas, Menlo, monospace; }
+    .pc { fill: #0b0b0b; font: 700 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .ax { stroke: #c3c2b7; stroke-width: 1; }
+    .a { fill: #eb6834; }
+    .b { fill: #2a78d6; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1a1a19; stroke: #383835; }
+      .t1, .lb, .pc { fill: #f0efec; }
+      .t2, .sm, .v { fill: #c3c2b7; }
+      .ax { stroke: #52514e; }
+      .a { fill: #d95926; }
+      .b { fill: #3987e5; }
+    }
+  </style>
+  <rect class="bg" x="0.5" y="0.5" width="759" height="349" rx="12"/>
+  <text class="t1" x="24" y="38">Tokens gastos por pergunta no Claude Code</text>
+  <text class="t2" x="24" y="60">Mediana de 3 sessões por tarefa · projeto real com ~250 arquivos · 12/12 respostas certas</text>
+
+  <rect class="a" x="190" y="76" width="12" height="12" rx="3"/><text class="sm" x="208" y="86">Sem codedict</text>
+  <rect class="b" x="306" y="76" width="12" height="12" rx="3"/><text class="sm" x="324" y="86">Com codedict</text>
+  <text class="sm" x="736" y="86" text-anchor="end">economia</text>
+
+  <line class="ax" x1="190" y1="98" x2="190" y2="318"/>
+
+  <!-- bars: 0.6923 px per thousand tokens; rounded data-end, square at the baseline -->
+  <g>
+    <text class="lb" x="24" y="114">Busca curta nº 1</text><text class="sm" x="24" y="131">"onde está X?"</text>
+    <path class="a" d="M190 104h85.3a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-85.3z"/><text class="v" x="285" y="115">129K</text>
+    <path class="b" d="M190 120h24.4a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-24.4z"/><text class="v" x="224" y="131">41K</text>
+    <text class="pc" x="736" y="125" text-anchor="end">−68%</text>
+  </g>
+  <g>
+    <text class="lb" x="24" y="169">Busca curta nº 2</text><text class="sm" x="24" y="186">"quem executa SQL?"</text>
+    <path class="a" d="M190 159h151.1a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-151.1z"/><text class="v" x="351" y="170">224K</text>
+    <path class="b" d="M190 175h61.1a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-61.1z"/><text class="v" x="261" y="186">94K</text>
+    <text class="pc" x="736" y="180" text-anchor="end">−58%</text>
+  </g>
+  <g>
+    <text class="lb" x="24" y="224">Fluxo nº 1</text><text class="sm" x="24" y="241">"do clique até o fim"</text>
+    <path class="a" d="M190 214h342.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-342.2z"/><text class="v" x="542" y="225">500K</text>
+    <path class="b" d="M190 230h144.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-144.2z"/><text class="v" x="344" y="241">214K</text>
+    <text class="pc" x="736" y="235" text-anchor="end">−57%</text>
+  </g>
+  <g>
+    <text class="lb" x="24" y="279">Fluxo nº 2</text><text class="sm" x="24" y="296">"mostre a cadeia"</text>
+    <path class="a" d="M190 269h439.8a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-439.8z"/><text class="v" x="640" y="280">641K</text>
+    <path class="b" d="M190 285h108.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-108.2z"/><text class="v" x="308" y="296">162K</text>
+    <text class="pc" x="736" y="290" text-anchor="end">−75%</text>
+  </g>
+
+  <text class="t2" x="24" y="336">Total: 4,54 mi → 1,67 mi tokens (−63%) · turnos 138 → 34 · detalhes em BENCHMARK.md</text>
+</svg>

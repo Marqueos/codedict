@@ -1,0 +1,11 @@
+[
+  {"name": "env-proxies", "expect": "Session.merge_environment_settings", "only_dir": "src/",
+   "queries": ["Where are the environment proxy settings merged into the request settings?"]},
+  {"name": "basic-auth", "expect": "_basic_auth_str", "only_dir": "src/",
+   "queries": ["How is the Basic auth header built?"]},
+  {"name": "redirects", "expect": "SessionRedirectMixin.resolve_redirects", "only_dir": "src/",
+   "queries": ["Where are redirects followed?"]},
+  {"name": "flow-get", "expect": "Session.send|HTTPAdapter.send|Session.request", "only_dir": "src/",
+   "mentions": ["Session.request", "Session.send", "HTTPAdapter.send"],
+   "queries": ["What happens from requests.get until the HTTP adapter sends the request?"]}
+]

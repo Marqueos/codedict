@@ -1,0 +1,39 @@
+name = "csharp"
+grammar = "csharp"
+extensions = [".cs"]
+module_from_path = false
+
+[kinds]
+namespace_declaration = "namespace"
+file_scoped_namespace_declaration = "namespace"
+class_declaration = "class"
+interface_declaration = "interface"
+struct_declaration = "struct"
+record_declaration = "record"
+enum_declaration = "enum"
+method_declaration = "method"
+constructor_declaration = "constructor"
+property_declaration = "property"
+delegate_declaration = "type"
+local_function_statement = "function"
+
+[calls]
+invocation_expression = "function"
+object_creation_expression = "type"
+
+[imports]
+nodes = ["using_directive"]
+
+[decorators]
+nodes = ["attribute_list"]
+
+[docs]
+style = "comments"
+
+[strings]
+nodes = ["string_literal", "verbatim_string_literal", "raw_string_literal", "interpolated_string_expression"]
+
+# Declared type of a variable/field, so `tags.Add()` links to the TagList class. Groups: var, type.
+[types]
+patterns = ['\b(?P<type>[A-Z]\w*)(?:<[^;=(){}]*>)?\??\s+(?P<var>[a-z_]\w*)\s*[;=,)]',
+            '\bvar\s+(?P<var>[a-z_]\w*)\s*=\s*new\s+(?P<type>[A-Z]\w*)']
