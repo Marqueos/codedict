@@ -1,27 +1,27 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="codedict: sua IA para de reler o projeto inteiro a cada pergunta sobre o código" width="100%">
+  <img src="assets/banner.svg" alt="codedict: your AI stops re-reading the whole project on every question" width="100%">
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-2a78d6"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2a78d6"></a>
   <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-2a78d6">
-  <img alt="Claude Code: liga sozinho" src="https://img.shields.io/badge/Claude%20Code-liga%20sozinho-eb6834">
-  <a href="BENCHMARK.md"><img alt="Benchmark: -63% tokens, 12/12 respostas certas" src="https://img.shields.io/badge/benchmark-%E2%88%9263%25%20tokens%20%C2%B7%2012%2F12%20certas-1baf7a"></a>
+  <img alt="Claude Code: on by default" src="https://img.shields.io/badge/Claude%20Code-on%20by%20default-eb6834">
+  <a href="BENCHMARK.md"><img alt="Benchmark: -63% tokens, 12/12 correct" src="https://img.shields.io/badge/benchmark-%E2%88%9263%25%20tokens%20%C2%B7%2012%2F12%20correct-1baf7a"></a>
 </p>
 
 <p align="center">
-  <b>Um dicionário do seu código para a IA, e um manual para você.</b><br>
-  Lê o projeto uma vez, sem IA, e entrega a resposta pronta junto com a pergunta.<br>
-  Menos turnos, menos tokens, a mesma resposta certa.
+  <b>A dictionary of your code for the AI, and a manual for you.</b><br>
+  It reads your project once, with no AI, and hands the answer over together with the question.<br>
+  Fewer turns, fewer tokens, the same correct answer.
 </p>
 
-<p align="center"><a href="#instalação">Instalação</a> · <a href="#de-onde-surgiu">Por quê</a> · <a href="#como-funciona">Como funciona</a> · <a href="#benchmark">Benchmark</a> · <a href="INTEGRACAO.md">Outras IAs</a> · <a href="#english">English</a></p>
+<p align="center"><a href="#install">Install</a> · <a href="#why-it-exists">Why</a> · <a href="#how-it-works">How it works</a> · <a href="#benchmark">Benchmark</a> · <a href="INTEGRATION.md">Other AIs</a></p>
 
 ---
 
-## Instalação
+## Install
 
-Uma linha, uma vez por máquina. Já liga no Claude Code para todos os projetos.
+One line, once per machine. It also turns codedict on in Claude Code for every project.
 
 **Windows** (PowerShell):
 
@@ -35,20 +35,20 @@ irm https://raw.githubusercontent.com/Marqueos/codedict/main/install.ps1 | iex
 curl -fsSL https://raw.githubusercontent.com/Marqueos/codedict/main/install.sh | sh
 ```
 
-Pronto. Abra o Claude Code em qualquer repositório git e pergunte sobre o código. Não há mais nada para configurar.
+That's it. Open Claude Code in any git repository and ask about the code. There is nothing else to configure.
 
 <details>
-<summary>O que o instalador faz, como atualizar e como remover</summary>
+<summary>What the installer does, how to update and how to uninstall</summary>
 
-- Confere o Python 3.11+. Se faltar, diz onde baixar.
-- Cria uma pasta própria em `~/.codedict`. Não precisa de administrador e não mexe no PATH nem no Python do sistema.
-- Roda `codedict setup`, que grava três hooks em `~/.claude/settings.json` e uma instrução curta em `~/.claude/CLAUDE.md`. As suas configurações ficam intactas, e o arquivo anterior é guardado como `settings.json.codedict-bak`.
+- Checks for Python 3.11+. If it is missing, it tells you where to get it.
+- Creates its own folder in `~/.codedict`. No admin rights, and it does not touch PATH or the system Python.
+- Runs `codedict setup`, which writes three hooks to `~/.claude/settings.json` and a short instruction to `~/.claude/CLAUDE.md`. Your settings stay intact, and the previous file is kept as `settings.json.codedict-bak`.
 
-**Atualizar:** rode a mesma linha de novo.
+**Update:** run the same line again.
 
-**Remover:** rode `~/.codedict/venv/bin/python -m codedict setup --remove` (Windows: `~\.codedict\venv\Scripts\python.exe -m codedict setup --remove`) e apague a pasta `~/.codedict`.
+**Uninstall:** run `~/.codedict/venv/bin/python -m codedict setup --remove` (Windows: `~\.codedict\venv\Scripts\python.exe -m codedict setup --remove`) and delete the `~/.codedict` folder.
 
-**Instalação manual:**
+**Manual install:**
 
 ```bash
 pip install git+https://github.com/Marqueos/codedict
@@ -57,180 +57,161 @@ python -m codedict setup
 
 </details>
 
-## De onde surgiu
+## Why it exists
 
-O codedict nasceu de um problema prático: num projeto real, com ~250 arquivos em TypeScript, C# e Python, as sessões do Claude Code viviam estourando o limite de uso.
+codedict came from a practical problem: on a real project with ~250 files in TypeScript, C# and Python, Claude Code sessions kept hitting the usage limit.
 
-Medimos e o culpado não era o código lido, e sim o **número de turnos**. Cada vez que a IA chama uma ferramenta (um grep, abrir um arquivo), o Claude Code relê o contexto inteiro: 35 a 50 mil tokens por turno. Uma pergunta simples, como "onde está X e quem chama?", levava 5 turnos de grep e leitura. Uma pergunta de fluxo, como "do clique até o resultado", levava mais de 20.
+We measured it, and the culprit was not the code being read but the **number of turns**. Every time the AI calls a tool (a grep, opening a file), Claude Code re-reads the whole context: 35 to 50 thousand tokens per turn. A simple question like "where is X and who calls it?" took 5 turns of grep and file reads. A flow question like "from the click to the result" took more than 20.
 
-A ideia foi fazer o trabalho de busca **uma vez, sem IA**, num índice local, e entregar a resposta pronta junto com a pergunta. A IA responde em 1 ou 2 turnos em vez de 5 a 20.
+The idea was to do the search work **once, with no AI**, in a local index, and hand the ready answer over together with the question. The AI answers in 1 or 2 turns instead of 5 to 20.
 
-A meta era cortar pelo menos 55% dos tokens sem perder nenhuma resposta. O resultado medido foi **−63%, com 12 de 12 respostas certas**.
+The goal was to cut at least 55% of the tokens without losing a single answer. The measured result was **−63%, with 12 out of 12 correct answers**.
 
-## Resultado
+## Results
 
 <p align="center">
-  <img src="assets/benchmark.svg" alt="Tokens por pergunta, mediana de 3 sessões: busca 1 de 129 mil para 41 mil (−68%); busca 2 de 224 mil para 94 mil (−58%); fluxo 1 de 500 mil para 214 mil (−57%); fluxo 2 de 641 mil para 162 mil (−75%). Total −63%." width="100%">
+  <img src="assets/benchmark.svg" alt="Tokens per question, median of 3 sessions: short search 1 from 129K to 41K (−68%); short search 2 from 224K to 94K (−58%); flow 1 from 500K to 214K (−57%); flow 2 from 641K to 162K (−75%). Total −63%." width="100%">
 </p>
 
-| Medida (12 sessões reais por lado) | Sem codedict | Com codedict | Diferença |
+| Measure (12 real sessions per side) | Without codedict | With codedict | Difference |
 |---|---|---|---|
-| Tokens | 4.543.176 | 1.666.033 | **−63%** |
-| Turnos | 138 | 34 | −75% |
-| Custo | US$ 5,76 | US$ 4,27 | −26% |
-| Respostas certas | 12/12 | 12/12 | = |
+| Tokens | 4,543,176 | 1,666,033 | **−63%** |
+| Turns | 138 | 34 | −75% |
+| Cost | US$ 5.76 | US$ 4.27 | −26% |
+| Correct answers | 12/12 | 12/12 | = |
 
-O custo em dólar cai menos que os tokens porque a parte fixa de cada sessão (o cache do contexto) é a mais cara e não some. Método completo, todas as rodadas e o que deu errado no caminho: [BENCHMARK.md](BENCHMARK.md).
+Cost falls less than tokens because the fixed part of each session (the context cache) is the most expensive part, and it does not go away. Full method, every round and what went wrong along the way: [BENCHMARK.md](BENCHMARK.md).
 
-## Como funciona
+## How it works
 
 ```mermaid
 flowchart LR
-    C["Seu código"] -->|"tree-sitter, sem IA"| I[("Índice local<br>.codedict/index.db")]
-    P["Sua pergunta"] --> H{"Hook do<br>Claude Code"}
+    C["Your code"] -->|"tree-sitter, no AI"| I[("Local index<br>.codedict/index.db")]
+    P["Your question"] --> H{"Claude Code<br>hook"}
     I --> H
-    H -->|"função, arquivo:linha,<br>quem chama, código"| R["IA responde<br>em 1 a 2 turnos"]
+    H -->|"function, file:line,<br>callers, code"| R["AI answers<br>in 1 to 2 turns"]
 ```
 
-1. **Lê o código uma vez.** Acha cada função, classe, rota HTTP e tabela SQL, e quem chama quem. Grava tudo num SQLite local, sem gastar nenhum token.
-2. **Mantém atualizado sozinho.** Ao abrir o projeto e depois de cada edição da IA, relê só os arquivos que mudaram.
-3. **Responde junto com a pergunta.** Quando você pergunta algo sobre o código, o hook busca no índice e entrega o resultado à IA junto com a pergunta: o lugar exato, todos os pontos de chamada, a cadeia até o ponto de entrada e o trecho de código.
-4. **Fica quieto no resto.** Conversa que não é sobre código ("valeu", "faz o commit") e comandos `/` não recebem nada.
+1. **Reads the code once.** Finds every function, class, HTTP route and SQL table, and who calls whom. Stores it all in a local SQLite file, spending zero tokens.
+2. **Keeps itself up to date.** When the project opens and after each AI edit, it re-reads only the files that changed.
+3. **Answers with the question.** When you ask about the code, the hook searches the index and hands the result to the AI together with your question: the exact location, every call site, the chain up to the entry point, and the code.
+4. **Stays quiet otherwise.** Prompts that are not about code ("thanks", "commit this") and `/` commands get nothing.
 
-Sem codedict, a IA faz assim: pergunta, grep, abre arquivo, outro grep, abre outro arquivo e só então responde. São 5 a 20 turnos, e cada um relê tudo.
+Without codedict, the AI goes: question, grep, open a file, another grep, another file, and only then answers. That is 5 to 20 turns, and each one re-reads everything.
 
-### E o RAG?
+### What about RAG?
 
-O codedict faz a mesma etapa de um RAG: busca o contexto e entrega à IA antes da resposta. A diferença está em como busca.
+codedict does the same step as a RAG: it fetches context and hands it to the AI before the answer. The difference is how it searches.
 
-| | RAG comum | codedict |
+| | Typical RAG | codedict |
 |---|---|---|
-| Como busca | Por texto "parecido" (embeddings) | Por nome exato e pelas ligações reais do código |
-| Precisa de IA para montar | Sim, um modelo de embedding | Não, só lê o código |
-| O que devolve | Trechos parecidos com a pergunta | A função, a linha, quem chama e a cadeia até a entrada |
-| Completo? | Pode faltar o trecho que importa | Lista todos os pontos de chamada |
-| Atualizar | Recalcula os vetores | Relê só o arquivo alterado, de graça |
+| How it searches | By "similar" text (embeddings) | By exact names and the code's real links |
+| Needs AI to build | Yes, an embedding model | No, it just parses the code |
+| What it returns | Chunks that look like the question | The function, the line, its callers and the chain up to the entry point |
+| Complete? | It can miss the chunk that matters | Lists every call site |
+| Updates | Recomputes vectors | Re-reads only the changed file, for free |
 
-Por ser só uma etapa de busca, funciona com qualquer IA: Claude, GPT, Gemini ou um modelo local.
+Because it is only a retrieval step, it works with any AI: Claude, GPT, Gemini or a local model.
 
-## Dois dicionários do mesmo índice
+## Two dictionaries from one index
 
-| Para quem | Onde | O que tem |
+| For | Where | What it has |
 |---|---|---|
-| **A IA** | `.codedict/ai/`, `codedict search` e o servidor MCP | Mapa compacto do projeto e respostas prontas por pergunta |
-| **Você** | `.codedict/docs/README.md` | Manual em Markdown com diagramas Mermaid: módulos, rotas, tabelas e quem chama quem |
+| **The AI** | `.codedict/ai/`, `codedict search` and the MCP server | A compact map of the project and ready answers per question |
+| **You** | `.codedict/docs/README.md` | A Markdown manual with Mermaid diagrams: modules, routes, tables and who calls whom |
 
-A pasta `.codedict/` já vem com o próprio `.gitignore`, então não suja o seu repositório.
+The `.codedict/` folder ships with its own `.gitignore`, so it never clutters your repository.
 
-## Outras IAs
+## Other AIs
 
-| Ferramenta | Como ligar |
+| Tool | How to connect |
 |---|---|
-| Claude Code | Automático pelo instalador |
-| Cursor, Codex, Gemini CLI, OpenCode, Windsurf | Servidor MCP (`codedict --root <projeto> mcp`) e `codedict agent-snippet >> AGENTS.md` |
-| Qualquer modelo, inclusive local (Ollama, LiteLLM) | Modo RAG: `codedict search "<pergunta>" --budget 2000` e cole o resultado no prompt |
+| Claude Code | Automatic, through the installer |
+| Cursor, Codex, Gemini CLI, OpenCode, Windsurf | MCP server (`codedict --root <project> mcp`) plus `codedict agent-snippet >> AGENTS.md` |
+| Any model, including local ones (Ollama, LiteLLM) | RAG mode: `codedict search "<question>" --budget 2000`, then paste the output into the prompt |
 
-Passo a passo com exemplos em Python: [INTEGRACAO.md](INTEGRACAO.md). Uso no dia a dia: [GUIA.md](GUIA.md).
+Step by step, with Python examples: [INTEGRATION.md](INTEGRATION.md). Day-to-day use: [GUIDE.md](GUIDE.md).
 
-## Comandos
+## Commands
 
 ```bash
-codedict search "onde o desconto é calculado"  # comece por aqui: resposta pronta
-codedict show Pricing.applyDiscount            # ficha + linhas exatas (aceita vários nomes)
-codedict callers OrderService.Save             # quem chama
-codedict callees OrdersController.Get          # o que chama
-codedict overview                              # visão geral: módulos, entradas, símbolos-chave
-codedict map src/Billing/                      # arquivos e símbolos de um módulo
-codedict routes api/orders                     # rotas HTTP
-codedict tables Orders                         # tabelas SQL e quem usa
-codedict note Pricing.applyDiscount "Regra validada com o financeiro"  # nota que sobrevive à reindexação
-codedict index .                               # indexa à mão (o Claude Code já faz sozinho)
+codedict search "where is the discount calculated"  # start here: a ready answer
+codedict show Pricing.applyDiscount                 # card + exact lines (accepts several names)
+codedict callers OrderService.Save                  # who calls it
+codedict callees OrdersController.Get               # what it calls
+codedict overview                                   # big picture: modules, entry points, key symbols
+codedict map src/Billing/                           # files and symbols of a module
+codedict routes api/orders                          # HTTP routes
+codedict tables Orders                              # SQL tables and who uses them
+codedict note Pricing.applyDiscount "Rule approved by finance"  # a note that survives reindexing
+codedict index .                                    # index by hand (Claude Code does it for you)
 ```
 
 ## Benchmark
 
-O teste comparou sessões reais do Claude Code com e sem codedict. Tudo para reproduzir está em `bench/`, e o relatório completo em [BENCHMARK.md](BENCHMARK.md).
+The test compared real Claude Code sessions with and without codedict. Everything needed to reproduce it is in `bench/`, and the full report is in [BENCHMARK.md](BENCHMARK.md).
 
-**Como medimos:**
-1. Duas cópias idênticas do mesmo projeto privado. Só a cópia B tem o índice e a instrução do codedict.
-2. Nenhuma das cópias tem memória do Claude nem arquivos com as respostas.
-3. Mesmo prompt, mesmo modelo e mesmas ferramentas liberadas (só leitura) nos dois lados.
-4. 3 sessões por tarefa em cada lado, reportando a mediana. A mesma tarefa chegou a variar 45% entre sessões.
-5. Uma resposta conta como certa quando cita as funções e os arquivos esperados. Essa conferência é automática.
+**How we measured:**
+1. Two identical copies of the same private project. Only copy B has the index and the codedict instruction.
+2. Neither copy has Claude memory or any file with the answers.
+3. Same prompt, same model and same allowed tools (read-only) on both sides.
+4. 3 sessions per task on each side, reporting the median. The same task varied up to 45% between sessions.
+5. An answer counts as correct when it names the expected functions and files. This check is automatic.
 
-**Resultados:**
+**Results:**
 
-| Rodada | Economia de tokens | Respostas certas |
+| Round | Token savings | Correct answers |
 |---|---|---|
-| Instalação padrão, com hook (4 tarefas × 3 sessões) | mediana de 63% por tarefa, −63% no total | 12/12 |
-| Perguntas de fluxo, só com a instrução (2 × 3) | mediana de 57,8%, −52% no total | 6/6 |
-| Buscas curtas, só com a instrução (10 × 3) | mediana de 51,5%, −51% no total | 30/30 |
+| Default install, with hook (4 tasks × 3 sessions) | median 63% per task, −63% total | 12/12 |
+| Flow questions, instruction only (2 × 3) | median 57.8%, −52% total | 6/6 |
+| Short searches, instruction only (10 × 3) | median 51.5%, −51% total | 30/30 |
 
-**Checagem sem tokens, em projetos públicos:** um script roda as perguntas direto no índice, sem IA, e diz se a primeira busca já traz a resposta completa. Qualquer pessoa reproduz:
+**Zero-token check on public projects:** a script runs the questions straight against the index, with no AI, and reports whether the first search already returns the full answer. Anyone can reproduce it:
 
-| Projeto | Linguagem | Resultado |
+| Project | Language | Result |
 |---|---|---|
-| [psf/requests](https://github.com/psf/requests) | Python | 3 de 4 perguntas respondidas numa busca só |
-| [spf13/cobra](https://github.com/spf13/cobra) | Go | 3 de 3 |
+| [psf/requests](https://github.com/psf/requests) | Python | 3 of 4 questions answered in one search |
+| [spf13/cobra](https://github.com/spf13/cobra) | Go | 3 of 3 |
 
 ```bash
 git clone https://github.com/spf13/cobra && git -C cobra checkout adbc881
 codedict index cobra
-python bench/answerability.py cobra bench/public/cobra.json        # sem tokens, ~1 segundo
-python bench/ab_test.py --a <cópia-sem> --b <cópia-com> --tasks bench/tasks.example.json --reps 3   # sessões reais (gasta tokens)
+python bench/answerability.py cobra bench/public/cobra.json        # no tokens, ~1 second
+python bench/ab_test.py --a <copy-without> --b <copy-with> --tasks bench/tasks.example.json --reps 3   # real sessions (spends tokens)
 ```
 
-**Limites honestos:**
-- Cada sessão do Claude Code tem um custo fixo de ~37 mil tokens por turno. O codedict corta turnos, mas não esse piso.
-- O custo em dólar cai menos que os tokens (−26% contra −63%), porque gravar o contexto em cache é o tipo de token mais caro.
-- Perguntas vagas ("o app está bom?") não têm nome para buscar. Nesse caso o codedict não manda nada e a IA trabalha como sempre.
+**Honest limits:**
+- Each Claude Code session has a fixed cost of ~37 thousand tokens per turn. codedict cuts turns, not that floor.
+- Cost in dollars falls less than tokens (−26% vs −63%), because writing the context to the cache is the most expensive kind of token.
+- Vague questions ("is the app any good?") have no name to search for. In that case codedict sends nothing and the AI works as usual.
 
-## Linguagens
+## Languages
 
-Python, JavaScript, TypeScript/TSX, C#, Java e Go (tree-sitter), SQL/T-SQL e Razor/Blazor (regex). Outros arquivos (`.json`, `.csproj`, `.md`…) entram como arquivos listados.
+Python, JavaScript, TypeScript/TSX, C#, Java and Go (tree-sitter), SQL/T-SQL and Razor/Blazor (regex). Other files (`.json`, `.csproj`, `.md`…) are listed as files.
 
-Para outra linguagem, copie um `.toml` de `codedict/languages/` para `.codedict/languages/` do projeto e ajuste os nós da gramática. A gramática vem do `tree-sitter-language-pack`, que tem mais de 160 linguagens.
+Questions can be in English or Portuguese: the search understands inflections in both ("parsed" finds `ParseFlags`, "exclusão" finds `excluir`).
+
+For another language, copy a `.toml` from `codedict/languages/` to the project's `.codedict/languages/` and adjust the grammar nodes. Grammars come from `tree-sitter-language-pack`, which has more than 160 languages.
 
 <details>
-<summary>O algoritmo, passo a passo</summary>
+<summary>The algorithm, step by step</summary>
 
-1. **Varredura:** `git ls-files` (respeita o `.gitignore`) mais `.codedictignore`. Ignora arquivos gerados, minificados e segredos (`.env`, `*.pem`).
-2. **Hash:** sha256 por arquivo; só reprocessa o que mudou.
-3. **Extração:** tree-sitter com um `.toml` por linguagem (nó da gramática → tipo universal). SQL e Razor por regex.
-4. **Registro por símbolo:** tipo, nome qualificado, linhas, assinatura, comentário de documentação, decorators e pai.
-5. **Fatos extras:** rotas HTTP (.NET, Minimal API, FastAPI/Flask, Spring, Nest, Express, Razor `@page`), tabelas SQL em strings e `.sql`, chamadas `EXEC`.
-6. **Resolução de chamadas sem compilador**, com confiança `high/medium/low`: mesmo arquivo, tipo declarado da variável, herança, `partial class`, métodos fora do tipo (Go), imports e mesmo diretório.
-7. **Pontes entre linguagens:** `npm run`, `python -m`, `go run` e `dotnet run` ligam, por exemplo, um app C# ao script TypeScript que ele roda.
-8. **Ranking:** PageRank no grafo de chamadas × uso em outros arquivos.
-9. **Busca:** SQLite FTS5 sobre as palavras dos identificadores (`CalcularImposto` → `calcular imposto`), caminho e documentação, sem acento. Também entende inflexões: "parsed" acha `ParseFlags` e "exclusão" acha `excluir`.
+1. **Walk:** `git ls-files` (respects `.gitignore`) plus `.codedictignore`. Skips generated and minified files and secrets (`.env`, `*.pem`).
+2. **Hash:** sha256 per file; only changed files are reprocessed.
+3. **Extraction:** tree-sitter with one `.toml` per language (grammar node → universal kind). SQL and Razor by regex.
+4. **Per-symbol record:** kind, qualified name, lines, signature, doc comment, decorators and parent.
+5. **Extra facts:** HTTP routes (.NET, Minimal API, FastAPI/Flask, Spring, Nest, Express, Razor `@page`), SQL tables in strings and `.sql` files, `EXEC` calls.
+6. **Call resolution without a compiler**, with `high/medium/low` confidence: same file, declared variable type, inheritance, `partial class`, methods outside the type (Go), imports and same directory.
+7. **Cross-language bridges:** `npm run`, `python -m`, `go run` and `dotnet run` link, for example, a C# app to the TypeScript script it runs.
+8. **Ranking:** PageRank on the call graph × usage in other files.
+9. **Search:** SQLite FTS5 over identifier words (`calculateTax` → `calculate tax`), path and docs, accent-insensitive, with inflections.
 
-**"O que faz", sem IA:** nota manual (`codedict note`) → comentário de documentação → assinatura e nome. Sem comentário, a descrição é estrutural (onde está, o que chama, quem chama), não semântica.
+**"What it does", without AI:** manual note (`codedict note`) → doc comment → signature and name. Without a doc comment, the description is structural (where it is, what it calls, who calls it), not semantic.
 
-**Limites conhecidos:** a resolução é por nome e tipo declarado, não por compilador; rotas MVC por convenção são inferidas como `/{Controller}/{Action}`; Razor e XAML dão só fatos de arquivo.
+**Known limits:** resolution is by name and declared type, not by a compiler; conventional MVC routes are inferred as `/{Controller}/{Action}`; Razor and XAML give file-level facts only.
 
 </details>
 
----
-
-## English
-
-**codedict** is a deterministic code dictionary for AI agents and developers. It parses your repo once with tree-sitter (no AI, zero tokens), stores symbols, call sites and routes in a local SQLite index, and hands the AI the exact answer (file:line, every caller, the call chain and the code) together with the question.
-
-**Why:** in Claude Code every tool call re-reads the whole context (35-50K tokens per turn). Questions like "where is X and who calls it?" took 5 to 20 turns of grep and file reads. With codedict they take 1 or 2.
-
-**Result** (real Claude Code sessions, 4 tasks × 3 runs per side): **−63% tokens**, −75% turns, −26% cost, 12/12 correct answers. See [BENCHMARK.md](BENCHMARK.md).
-
-**Install** (also turns it on in Claude Code for every project):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Marqueos/codedict/main/install.sh | sh                   # macOS / Linux
-irm https://raw.githubusercontent.com/Marqueos/codedict/main/install.ps1 | iex                       # Windows PowerShell
-```
-
-**Other agents:** MCP server (`codedict --root <project> mcp`) plus `codedict agent-snippet >> AGENTS.md`. **Any LLM, including local models:** `codedict search "<question>" --budget 2000` is the retrieval step of a RAG, exact instead of similar. See [INTEGRACAO.md](INTEGRACAO.md).
-
-**Two outputs from one index:** a compact map for the AI (`.codedict/ai/`) and Markdown + Mermaid docs for humans (`.codedict/docs/`).
-
-## Licença
+## License
 
 [MIT](LICENSE)

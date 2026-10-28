@@ -27,7 +27,7 @@ def _mod_file(label: str) -> str:
     return slug(label.replace("*", "files")) + ".md"
 
 
-def write_docs(con, root: Path, out_dir: Path | None = None, lang: str = "pt") -> Path:
+def write_docs(con, root: Path, out_dir: Path | None = None, lang: str = "en") -> Path:
     L = LABELS.get(lang, LABELS["en"])
     out = out_dir or root / ".codedict" / "docs"
     (out / "modules").mkdir(parents=True, exist_ok=True)

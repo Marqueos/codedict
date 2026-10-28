@@ -22,40 +22,40 @@
     }
   </style>
   <rect class="bg" x="0.5" y="0.5" width="759" height="349" rx="12"/>
-  <text class="t1" x="24" y="38">Tokens gastos por pergunta no Claude Code</text>
-  <text class="t2" x="24" y="60">Mediana de 3 sessões por tarefa · projeto real com ~250 arquivos · 12/12 respostas certas</text>
+  <text class="t1" x="24" y="38">Tokens spent per question in Claude Code</text>
+  <text class="t2" x="24" y="60">Median of 3 sessions per task · real project with ~250 files · 12/12 correct answers</text>
 
-  <rect class="a" x="190" y="76" width="12" height="12" rx="3"/><text class="sm" x="208" y="86">Sem codedict</text>
-  <rect class="b" x="306" y="76" width="12" height="12" rx="3"/><text class="sm" x="324" y="86">Com codedict</text>
-  <text class="sm" x="736" y="86" text-anchor="end">economia</text>
+  <rect class="a" x="190" y="76" width="12" height="12" rx="3"/><text class="sm" x="208" y="86">Without codedict</text>
+  <rect class="b" x="330" y="76" width="12" height="12" rx="3"/><text class="sm" x="348" y="86">With codedict</text>
+  <text class="sm" x="736" y="86" text-anchor="end">savings</text>
 
   <line class="ax" x1="190" y1="98" x2="190" y2="318"/>
 
   <!-- bars: 0.6923 px per thousand tokens; rounded data-end, square at the baseline -->
   <g>
-    <text class="lb" x="24" y="114">Busca curta nº 1</text><text class="sm" x="24" y="131">"onde está X?"</text>
+    <text class="lb" x="24" y="114">Short search 1</text><text class="sm" x="24" y="131">"where is X?"</text>
     <path class="a" d="M190 104h85.3a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-85.3z"/><text class="v" x="285" y="115">129K</text>
     <path class="b" d="M190 120h24.4a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-24.4z"/><text class="v" x="224" y="131">41K</text>
     <text class="pc" x="736" y="125" text-anchor="end">−68%</text>
   </g>
   <g>
-    <text class="lb" x="24" y="169">Busca curta nº 2</text><text class="sm" x="24" y="186">"quem executa SQL?"</text>
+    <text class="lb" x="24" y="169">Short search 2</text><text class="sm" x="24" y="186">"what runs the SQL?"</text>
     <path class="a" d="M190 159h151.1a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-151.1z"/><text class="v" x="351" y="170">224K</text>
     <path class="b" d="M190 175h61.1a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-61.1z"/><text class="v" x="261" y="186">94K</text>
     <text class="pc" x="736" y="180" text-anchor="end">−58%</text>
   </g>
   <g>
-    <text class="lb" x="24" y="224">Fluxo nº 1</text><text class="sm" x="24" y="241">"do clique até o fim"</text>
+    <text class="lb" x="24" y="224">Flow 1</text><text class="sm" x="24" y="241">"from the click to the end"</text>
     <path class="a" d="M190 214h342.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-342.2z"/><text class="v" x="542" y="225">500K</text>
     <path class="b" d="M190 230h144.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-144.2z"/><text class="v" x="344" y="241">214K</text>
     <text class="pc" x="736" y="235" text-anchor="end">−57%</text>
   </g>
   <g>
-    <text class="lb" x="24" y="279">Fluxo nº 2</text><text class="sm" x="24" y="296">"mostre a cadeia"</text>
+    <text class="lb" x="24" y="279">Flow 2</text><text class="sm" x="24" y="296">"show the call chain"</text>
     <path class="a" d="M190 269h439.8a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-439.8z"/><text class="v" x="640" y="280">641K</text>
     <path class="b" d="M190 285h108.2a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-108.2z"/><text class="v" x="308" y="296">162K</text>
     <text class="pc" x="736" y="290" text-anchor="end">−75%</text>
   </g>
 
-  <text class="t2" x="24" y="336">Total: 4,54 mi → 1,67 mi tokens (−63%) · turnos 138 → 34 · detalhes em BENCHMARK.md</text>
+  <text class="t2" x="24" y="336">Total: 4.54M → 1.67M tokens (−63%) · turns 138 → 34 · details in BENCHMARK.md</text>
 </svg>

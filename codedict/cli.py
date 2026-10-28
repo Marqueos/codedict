@@ -32,7 +32,7 @@ def main(argv=None):
     p.add_argument("--no-ai", action="store_true", help="skip .codedict/ai output")
     p.add_argument("--no-docs", action="store_true", help="skip .codedict/docs output")
     p.add_argument("--budget", type=int, default=3000, help="token budget for ai/INDEX.md")
-    p.add_argument("--docs-lang", default="pt", choices=["pt", "en"])
+    p.add_argument("--docs-lang", default="en", choices=["en", "pt"])
     p.add_argument("--docs-out", default=None, help="human docs folder (default .codedict/docs)")
 
     sub.add_parser("overview", help="L0 overview for an LLM").add_argument("--budget", type=int, default=3000)
